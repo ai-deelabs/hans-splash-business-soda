@@ -44,7 +44,7 @@
 
   /* ---------- NAV ---------- */
   header{position:sticky;top:0;z-index:50;background:rgba(244,253,255,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(6,196,204,.18)}
-  nav{display:flex;align-items:center;justify-content:space-between;height:78px}
+  nav{position:relative;display:flex;align-items:center;justify-content:space-between;height:78px}
   .logo{font-size:1.55rem;font-weight:800;letter-spacing:-.04em;display:flex;align-items:baseline;gap:.1em}
   .logo .drop{color:var(--aqua-deep)}
   .logo .splash{
@@ -68,6 +68,27 @@
   .btn-aqua:hover{transform:translateY(-3px)}
   .nav-cta{display:none}
   @media(min-width:880px){.nav-cta{display:inline-flex}}
+
+  /* hamburger (mobile only) */
+  .nav-toggle{display:none;background:transparent;border:none;cursor:pointer;color:var(--ink);padding:8px;border-radius:10px;align-items:center;justify-content:center;transition:background .2s}
+  .nav-toggle:hover{background:rgba(10,37,64,.06)}
+  .nav-toggle i{width:26px;height:26px}
+  @media(max-width:879px){
+    .nav-toggle{display:inline-flex}
+    .nav-links{
+      position:absolute;top:calc(100% + 1px);left:0;right:0;
+      flex-direction:column;align-items:stretch;gap:0;font-size:1.02rem;
+      background:rgba(244,253,255,.98);backdrop-filter:blur(14px);
+      border:1px solid rgba(6,196,204,.18);border-radius:0 0 20px 20px;
+      padding:8px 22px 20px;box-shadow:0 26px 44px -26px rgba(3,148,184,.55);
+      display:none;
+    }
+    .nav-links.open{display:flex}
+    .nav-links>a{padding:14px 2px;opacity:.85;border-bottom:1px solid rgba(10,37,64,.08)}
+    .nav-links>a::after{display:none}
+    .nav-links a.nav-cta{display:inline-flex;justify-content:center;padding:14px 28px;margin-top:16px;border-bottom:none}
+    .lang-switch{margin-top:16px;align-self:flex-start}
+  }
 
   /* ---------- LANGUAGE SWITCH ---------- */
   .lang-switch{display:inline-flex;border:1.5px solid rgba(10,37,64,.18);border-radius:999px;overflow:hidden;font-weight:700;font-size:.82rem;flex-shrink:0}
@@ -249,7 +270,7 @@
   <div class="wrap">
     <nav>
       <div class="logo">Han's<span class="splash">Splash</span><small>Business Soda</small></div>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="#flavors" data-lang-th="รสชาติ" data-lang-en="Flavors">รสชาติ</a>
         <a href="#why" data-lang-th="ทำไมต้องสแปลช" data-lang-en="Why Splash">ทำไมต้องสแปลช</a>
         <a href="#crew" data-lang-th="เหล่าแก๊งสแปลช" data-lang-en="The Crew">เหล่าแก๊งสแปลช</a>
@@ -259,6 +280,7 @@
           <button type="button" data-set-lang="en">EN</button>
         </div>
       </div>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="เมนู / Menu" aria-controls="navLinks" aria-expanded="false"><i data-lucide="menu"></i></button>
     </nav>
   </div>
 </header>
@@ -536,6 +558,22 @@
       setLang(this.getAttribute('data-set-lang'));
     });
   });
+
+  // ---------- Mobile nav toggle ----------
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  if(navToggle && navLinks){
+    navToggle.addEventListener('click', function(){
+      var open = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
   var saved = 'th';
   try{ saved = localStorage.getItem('lang') || 'th'; }catch(e){}
