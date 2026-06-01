@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Han's Splash — Business Soda</title>
+<title>Han's Splash — โซดาซ่าสำหรับคนทำงาน</title>
+<meta name="description" content="Han's Splash โซดาซ่าจัดจ้านที่เกิดจากท้องทะเล ไม่เติมน้ำตาล 6 รสชาติจัดเต็ม พร้อมความซ่าแท้ ๆ สำหรับคนที่ไม่เคยหยุดนิ่ง">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@0.460.0"></script>
 <style>
   :root{
@@ -28,6 +32,8 @@
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
     line-height:1.6;
+    word-break:break-word;
+    overflow-wrap:break-word;
   }
   h1,h2,h3,.display{
     font-family:"Helvetica Neue",Arial,sans-serif;
@@ -36,6 +42,14 @@
     line-height:.92;
     text-transform:uppercase;
   }
+
+  /* ---------- THAI TYPOGRAPHY ---------- */
+  html[lang="th"] body{font-family:'Noto Sans Thai','Sukhumvit Set',sans-serif}
+  html[lang="th"] h1,
+  html[lang="th"] h2,
+  html[lang="th"] h3,
+  html[lang="th"] .display{font-family:'Noto Sans Thai','Sukhumvit Set',sans-serif;line-height:1.15}
+
   .wrap{max-width:1180px;margin:0 auto;padding:0 26px}
   a{color:inherit;text-decoration:none}
   img{display:block;width:100%;height:100%;object-fit:cover}
@@ -51,6 +65,7 @@
   .logo{
     font-weight:800;font-size:1.45rem;letter-spacing:-.04em;
     text-transform:uppercase;display:flex;align-items:baseline;gap:.32em;
+    font-family:"Helvetica Neue",Arial,sans-serif;
   }
   .logo .splash{
     background:linear-gradient(110deg,var(--aqua),var(--coral));
@@ -72,6 +87,15 @@
   .btn-ghost{background:transparent;border:2px solid var(--ink);color:var(--ink)}
   .btn-ghost:hover{background:var(--ink);color:var(--cream)}
   .nav-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--ink)}
+
+  /* ---------- LANGUAGE SWITCHER ---------- */
+  .lang-switch{display:inline-flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden}
+  .lang-switch button{
+    font-family:inherit;font-weight:800;font-size:.72rem;letter-spacing:.06em;
+    padding:7px 13px;background:transparent;border:none;cursor:pointer;color:var(--ink);
+    transition:background .2s,color .2s;line-height:1;
+  }
+  .lang-switch button.active{background:var(--ink);color:var(--cream)}
 
   /* ---------- HERO ---------- */
   .hero{position:relative;padding:72px 0 40px}
@@ -268,6 +292,7 @@
     .nav-links.open{display:flex}
     .nav-links a{padding:13px 0;width:100%;border-bottom:1px solid rgba(13,61,71,.08)}
     .nav-links .btn{margin-top:10px}
+    .nav-links .lang-switch{margin-top:14px;align-self:flex-start}
     .nav-toggle{display:block}
     .hero-grid{grid-template-columns:1fr;gap:46px}
     .hero-visual{max-width:420px;margin:0 auto;width:100%}
@@ -290,11 +315,15 @@
     <nav>
       <a href="#" class="logo">HAN'S<span class="splash">Splash</span><small>Business Soda</small></a>
       <div class="nav-links" id="navLinks">
-        <a href="#flavors">Flavors</a>
-        <a href="#why">Why Us</a>
-        <a href="#story">Story</a>
-        <a href="#voices">Voices</a>
-        <a href="#join" class="btn btn-primary">Get Splashed</a>
+        <a href="#flavors" data-lang-th="รสชาติ" data-lang-en="Flavors">รสชาติ</a>
+        <a href="#why" data-lang-th="ทำไมต้องเรา" data-lang-en="Why Us">ทำไมต้องเรา</a>
+        <a href="#story" data-lang-th="เรื่องราว" data-lang-en="Story">เรื่องราว</a>
+        <a href="#voices" data-lang-th="เสียงจากลูกค้า" data-lang-en="Voices">เสียงจากลูกค้า</a>
+        <a href="#join" class="btn btn-primary" data-lang-th="เริ่มความซ่า" data-lang-en="Get Splashed">เริ่มความซ่า</a>
+        <div class="lang-switch" id="langSwitch">
+          <button type="button" data-set-lang="th">TH</button>
+          <button type="button" data-set-lang="en">EN</button>
+        </div>
       </div>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
     </nav>
@@ -306,17 +335,17 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow"><i data-lucide="waves"></i> Born from the sea</span>
-        <h1>Crisp.<br>Bold.<br><span class="wave">Splash.</span></h1>
-        <p class="lead">A soda that moves like the ocean — bright, fizzy, and built for people who never stop. Hydration with a pulse.</p>
+        <span class="eyebrow"><i data-lucide="waves"></i> <span data-lang-th="ถือกำเนิดจากท้องทะเล" data-lang-en="Born from the sea">ถือกำเนิดจากท้องทะเล</span></span>
+        <h1><span data-lang-th="สดชื่น" data-lang-en="Crisp.">สดชื่น</span><br><span data-lang-th="จัดจ้าน" data-lang-en="Bold.">จัดจ้าน</span><br><span class="wave" data-lang-th="ซ่า" data-lang-en="Splash.">ซ่า</span></h1>
+        <p class="lead" data-lang-th="โซดาที่เคลื่อนไหวดั่งคลื่นทะเล สดใส ซ่าซ่า และสร้างมาเพื่อคนที่ไม่เคยหยุดนิ่ง ความสดชื่นที่มีจังหวะชีวิต" data-lang-en="A soda that moves like the ocean — bright, fizzy, and built for people who never stop. Hydration with a pulse.">โซดาที่เคลื่อนไหวดั่งคลื่นทะเล สดใส ซ่าซ่า และสร้างมาเพื่อคนที่ไม่เคยหยุดนิ่ง ความสดชื่นที่มีจังหวะชีวิต</p>
         <div class="hero-cta">
-          <a href="#flavors" class="btn btn-primary">Taste the wave <i data-lucide="arrow-right"></i></a>
-          <a href="#story" class="btn btn-ghost">Our story</a>
+          <a href="#flavors" class="btn btn-primary"><span data-lang-th="ลิ้มรสคลื่นความซ่า" data-lang-en="Taste the wave">ลิ้มรสคลื่นความซ่า</span> <i data-lucide="arrow-right"></i></a>
+          <a href="#story" class="btn btn-ghost" data-lang-th="เรื่องราวของเรา" data-lang-en="Our story">เรื่องราวของเรา</a>
         </div>
         <div class="hero-stats">
-          <div><div class="num">0g</div><div class="lbl">Added sugar</div></div>
-          <div><div class="num">6</div><div class="lbl">Wild flavors</div></div>
-          <div><div class="num">100%</div><div class="lbl">Real fizz</div></div>
+          <div><div class="num">0g</div><div class="lbl" data-lang-th="น้ำตาลที่เติม" data-lang-en="Added sugar">น้ำตาลที่เติม</div></div>
+          <div><div class="num">6</div><div class="lbl" data-lang-th="รสชาติจัดจ้าน" data-lang-en="Wild flavors">รสชาติจัดจ้าน</div></div>
+          <div><div class="num">100%</div><div class="lbl" data-lang-th="ความซ่าแท้" data-lang-en="Real fizz">ความซ่าแท้</div></div>
         </div>
       </div>
       <div class="hero-visual">
@@ -325,7 +354,7 @@
         </div>
         <div class="float-card">
           <div class="ic"><i data-lucide="droplets"></i></div>
-          <div><b>Sparkling fresh</b><span>Sea-mineral charged</span></div>
+          <div><b data-lang-th="สดชื่นซ่าซ่า" data-lang-en="Sparkling fresh">สดชื่นซ่าซ่า</b><span data-lang-th="อัดแน่นแร่ธาตุจากทะเล" data-lang-en="Sea-mineral charged">อัดแน่นแร่ธาตุจากทะเล</span></div>
         </div>
       </div>
     </div>
@@ -333,14 +362,14 @@
 
   <div class="marquee">
     <div class="marquee-track">
-      <span><i data-lucide="zap"></i> Refreshment in motion</span>
-      <span><i data-lucide="zap"></i> Zero artificial dyes</span>
-      <span><i data-lucide="zap"></i> Brewed for busy people</span>
-      <span><i data-lucide="zap"></i> Wave after wave</span>
-      <span><i data-lucide="zap"></i> Refreshment in motion</span>
-      <span><i data-lucide="zap"></i> Zero artificial dyes</span>
-      <span><i data-lucide="zap"></i> Brewed for busy people</span>
-      <span><i data-lucide="zap"></i> Wave after wave</span>
+      <span><i data-lucide="zap"></i> <span data-lang-th="ความสดชื่นที่เคลื่อนไหว" data-lang-en="Refreshment in motion">ความสดชื่นที่เคลื่อนไหว</span></span>
+      <span><i data-lucide="zap"></i> <span data-lang-th="ปราศจากสีสังเคราะห์" data-lang-en="Zero artificial dyes">ปราศจากสีสังเคราะห์</span></span>
+      <span><i data-lucide="zap"></i> <span data-lang-th="สร้างสรรค์เพื่อคนยุ่ง" data-lang-en="Brewed for busy people">สร้างสรรค์เพื่อคนยุ่ง</span></span>
+      <span><i data-lucide="zap"></i> <span data-lang-th="ซ่าแล้วซ่าอีก" data-lang-en="Wave after wave">ซ่าแล้วซ่าอีก</span></span>
+      <span><i data-lucide="zap"></i> <span data-lang-th="ความสดชื่นที่เคลื่อนไหว" data-lang-en="Refreshment in motion">ความสดชื่นที่เคลื่อนไหว</span></span>
+      <span><i data-lucide="zap"></i> <span data-lang-th="ปราศจากสีสังเคราะห์" data-lang-en="Zero artificial dyes">ปราศจากสีสังเคราะห์</span></span>
+      <span><i data-lucide="zap"></i> <span data-lang-th="สร้างสรรค์เพื่อคนยุ่ง" data-lang-en="Brewed for busy people">สร้างสรรค์เพื่อคนยุ่ง</span></span>
+      <span><i data-lucide="zap"></i> <span data-lang-th="ซ่าแล้วซ่าอีก" data-lang-en="Wave after wave">ซ่าแล้วซ่าอีก</span></span>
     </div>
   </div>
 </section>
@@ -354,74 +383,74 @@
 <section class="flavors" id="flavors">
   <div class="wrap">
     <div class="section-head">
-      <span class="tag">The lineup</span>
-      <h2>Six flavors that hit like a wave</h2>
+      <span class="tag" data-lang-th="ไลน์อัพรสชาติ" data-lang-en="The lineup">ไลน์อัพรสชาติ</span>
+      <h2 data-lang-th="หกรสชาติที่ซัดเข้าใส่ดั่งคลื่น" data-lang-en="Six flavors that hit like a wave">หกรสชาติที่ซัดเข้าใส่ดั่งคลื่น</h2>
     </div>
     <div class="flavor-row">
       <article class="flavor">
         <div class="pic">
-          <span class="chip" style="background:var(--aqua-soft)">Signature</span>
+          <span class="chip" style="background:var(--aqua-soft)" data-lang-th="ซิกเนเจอร์" data-lang-en="Signature">ซิกเนเจอร์</span>
           <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?w=520&h=420&fit=crop" alt="Aqua mist soda">
         </div>
         <div class="body">
           <h3>Aqua Mist</h3>
-          <p>Clean spring water meets crisp cucumber and a whisper of sea salt. The pure splash.</p>
-          <div class="meta"><i data-lucide="droplet"></i> Light &amp; bright</div>
+          <p data-lang-th="น้ำแร่ธรรมชาติบริสุทธิ์ผสานแตงกวาสดกรอบและเกลือทะเลจาง ๆ ความซ่าที่บริสุทธิ์ที่สุด" data-lang-en="Clean spring water meets crisp cucumber and a whisper of sea salt. The pure splash.">น้ำแร่ธรรมชาติบริสุทธิ์ผสานแตงกวาสดกรอบและเกลือทะเลจาง ๆ ความซ่าที่บริสุทธิ์ที่สุด</p>
+          <div class="meta"><i data-lucide="droplet"></i> <span data-lang-th="เบาและสดใส" data-lang-en="Light &amp; bright">เบาและสดใส</span></div>
         </div>
       </article>
       <article class="flavor">
         <div class="pic">
-          <span class="chip" style="background:var(--coral-soft)">Fan favorite</span>
+          <span class="chip" style="background:var(--coral-soft)" data-lang-th="ขวัญใจแฟน ๆ" data-lang-en="Fan favorite">ขวัญใจแฟน ๆ</span>
           <img src="https://images.unsplash.com/photo-1574417836112-fda6a03dae97?w=520&h=420&fit=crop" alt="Citrus surge soda">
         </div>
         <div class="body">
           <h3>Citrus Surge</h3>
-          <p>Blood orange and yuzu collide in a tidal burst of zest. Loud, juicy, alive.</p>
-          <div class="meta"><i data-lucide="sun"></i> Bold &amp; zesty</div>
+          <p data-lang-th="บลัดออเรนจ์ปะทะยูซุในระเบิดความเปรี้ยวซ่าดั่งคลื่นซัด จัดจ้าน ฉ่ำ และมีชีวิตชีวา" data-lang-en="Blood orange and yuzu collide in a tidal burst of zest. Loud, juicy, alive.">บลัดออเรนจ์ปะทะยูซุในระเบิดความเปรี้ยวซ่าดั่งคลื่นซัด จัดจ้าน ฉ่ำ และมีชีวิตชีวา</p>
+          <div class="meta"><i data-lucide="sun"></i> <span data-lang-th="จัดจ้านและเปรี้ยวซ่า" data-lang-en="Bold &amp; zesty">จัดจ้านและเปรี้ยวซ่า</span></div>
         </div>
       </article>
       <article class="flavor">
         <div class="pic">
-          <span class="chip" style="background:var(--sun)">New</span>
+          <span class="chip" style="background:var(--sun)" data-lang-th="ใหม่" data-lang-en="New">ใหม่</span>
           <img src="https://images.unsplash.com/photo-1625813506062-ccb45305a4cc?w=520&h=420&fit=crop" alt="Tide berry soda">
         </div>
         <div class="body">
           <h3>Tide Berry</h3>
-          <p>Wild blueberry and lime ride a deep, fizzy current. Tart, cool, unforgettable.</p>
-          <div class="meta"><i data-lucide="waves"></i> Deep &amp; tart</div>
+          <p data-lang-th="บลูเบอร์รีป่าและมะนาวโลดแล่นบนกระแสความซ่าอันลึกล้ำ เปรี้ยว เย็น และไม่รู้ลืม" data-lang-en="Wild blueberry and lime ride a deep, fizzy current. Tart, cool, unforgettable.">บลูเบอร์รีป่าและมะนาวโลดแล่นบนกระแสความซ่าอันลึกล้ำ เปรี้ยว เย็น และไม่รู้ลืม</p>
+          <div class="meta"><i data-lucide="waves"></i> <span data-lang-th="ลึกล้ำและเปรี้ยว" data-lang-en="Deep &amp; tart">ลึกล้ำและเปรี้ยว</span></div>
         </div>
       </article>
       <article class="flavor">
         <div class="pic">
-          <span class="chip" style="background:var(--aqua-soft)">Crowd pleaser</span>
+          <span class="chip" style="background:var(--aqua-soft)" data-lang-th="ถูกใจทุกคน" data-lang-en="Crowd pleaser">ถูกใจทุกคน</span>
           <img src="https://images.unsplash.com/photo-1532517287333-fbb66d7e6006?w=520&h=420&fit=crop" alt="Lemon foam soda">
         </div>
         <div class="body">
           <h3>Lemon Foam</h3>
-          <p>Sharp Sicilian lemon over soft vanilla cream. The breaker that finishes smooth.</p>
-          <div class="meta"><i data-lucide="citrus"></i> Sharp &amp; creamy</div>
+          <p data-lang-th="เลมอนซิซิเลียนเปรี้ยวจี๊ดบนครีมวานิลลานุ่มละมุน คลื่นที่จบลงอย่างนุ่มนวล" data-lang-en="Sharp Sicilian lemon over soft vanilla cream. The breaker that finishes smooth.">เลมอนซิซิเลียนเปรี้ยวจี๊ดบนครีมวานิลลานุ่มละมุน คลื่นที่จบลงอย่างนุ่มนวล</p>
+          <div class="meta"><i data-lucide="citrus"></i> <span data-lang-th="จี๊ดและครีมมี่" data-lang-en="Sharp &amp; creamy">จี๊ดและครีมมี่</span></div>
         </div>
       </article>
       <article class="flavor">
         <div class="pic">
-          <span class="chip" style="background:var(--coral-soft)">Limited</span>
+          <span class="chip" style="background:var(--coral-soft)" data-lang-th="รุ่นจำกัด" data-lang-en="Limited">รุ่นจำกัด</span>
           <img src="https://images.unsplash.com/photo-1527066236128-2ff79f7b9705?w=520&h=420&fit=crop" alt="Reef mint soda">
         </div>
         <div class="body">
           <h3>Reef Mint</h3>
-          <p>Cool peppermint and green apple over crackling bubbles. A cold plunge in a can.</p>
-          <div class="meta"><i data-lucide="snowflake"></i> Cool &amp; crisp</div>
+          <p data-lang-th="เปปเปอร์มินต์เย็นซ่าและแอปเปิลเขียวบนฟองฟู่แตกซ่า ดั่งกระโดดลงน้ำเย็นในกระป๋องเดียว" data-lang-en="Cool peppermint and green apple over crackling bubbles. A cold plunge in a can.">เปปเปอร์มินต์เย็นซ่าและแอปเปิลเขียวบนฟองฟู่แตกซ่า ดั่งกระโดดลงน้ำเย็นในกระป๋องเดียว</p>
+          <div class="meta"><i data-lucide="snowflake"></i> <span data-lang-th="เย็นและสดชื่น" data-lang-en="Cool &amp; crisp">เย็นและสดชื่น</span></div>
         </div>
       </article>
       <article class="flavor">
         <div class="pic">
-          <span class="chip" style="background:var(--sun)">Bold</span>
+          <span class="chip" style="background:var(--sun)" data-lang-th="จัดจ้าน" data-lang-en="Bold">จัดจ้าน</span>
           <img src="https://images.unsplash.com/photo-1535868118629-f37bcd69ff59?w=520&h=420&fit=crop" alt="Coral punch soda">
         </div>
         <div class="body">
           <h3>Coral Punch</h3>
-          <p>Guava, passionfruit, and a tropical riptide of flavor. Sweet, wild, and warm.</p>
-          <div class="meta"><i data-lucide="flame"></i> Tropical &amp; sweet</div>
+          <p data-lang-th="ฝรั่ง เสาวรส และคลื่นรสเขตร้อนที่ซัดสาด หวาน จัดจ้าน และอบอุ่น" data-lang-en="Guava, passionfruit, and a tropical riptide of flavor. Sweet, wild, and warm.">ฝรั่ง เสาวรส และคลื่นรสเขตร้อนที่ซัดสาด หวาน จัดจ้าน และอบอุ่น</p>
+          <div class="meta"><i data-lucide="flame"></i> <span data-lang-th="เขตร้อนและหวาน" data-lang-en="Tropical &amp; sweet">เขตร้อนและหวาน</span></div>
         </div>
       </article>
     </div>
@@ -437,29 +466,29 @@
 <section class="why" id="why">
   <div class="wrap">
     <div class="section-head">
-      <span class="tag" style="color:var(--coral)">Why Han's Splash</span>
-      <h2>Refreshment with substance</h2>
+      <span class="tag" style="color:var(--coral)" data-lang-th="ทำไมต้อง Han's Splash" data-lang-en="Why Han's Splash">ทำไมต้อง Han's Splash</span>
+      <h2 data-lang-th="ความสดชื่นที่มีคุณค่า" data-lang-en="Refreshment with substance">ความสดชื่นที่มีคุณค่า</h2>
     </div>
     <div class="feature-grid">
       <div class="feature">
         <div class="ic"><i data-lucide="leaf"></i></div>
-        <h3>Clean by nature</h3>
-        <p>No artificial dyes, no fake sweeteners. Just real fruit and pure sparkling water.</p>
+        <h3 data-lang-th="สะอาดโดยธรรมชาติ" data-lang-en="Clean by nature">สะอาดโดยธรรมชาติ</h3>
+        <p data-lang-th="ไม่มีสีสังเคราะห์ ไม่มีสารให้ความหวานเทียม มีเพียงผลไม้แท้และน้ำโซดาบริสุทธิ์" data-lang-en="No artificial dyes, no fake sweeteners. Just real fruit and pure sparkling water.">ไม่มีสีสังเคราะห์ ไม่มีสารให้ความหวานเทียม มีเพียงผลไม้แท้และน้ำโซดาบริสุทธิ์</p>
       </div>
       <div class="feature">
         <div class="ic"><i data-lucide="zap"></i></div>
-        <h3>Built for momentum</h3>
-        <p>Light electrolytes and a crisp finish to keep you moving through a packed day.</p>
+        <h3 data-lang-th="สร้างมาเพื่อความต่อเนื่อง" data-lang-en="Built for momentum">สร้างมาเพื่อความต่อเนื่อง</h3>
+        <p data-lang-th="เกลือแร่อิเล็กโทรไลต์เบา ๆ และรสจบที่สดชื่น ช่วยให้คุณเดินหน้าตลอดวันที่แสนยุ่ง" data-lang-en="Light electrolytes and a crisp finish to keep you moving through a packed day.">เกลือแร่อิเล็กโทรไลต์เบา ๆ และรสจบที่สดชื่น ช่วยให้คุณเดินหน้าตลอดวันที่แสนยุ่ง</p>
       </div>
       <div class="feature">
         <div class="ic"><i data-lucide="recycle"></i></div>
-        <h3>Tide-friendly cans</h3>
-        <p>Infinitely recyclable aluminum and ocean-positive shipping on every order.</p>
+        <h3 data-lang-th="กระป๋องที่เป็นมิตรกับทะเล" data-lang-en="Tide-friendly cans">กระป๋องที่เป็นมิตรกับทะเล</h3>
+        <p data-lang-th="อะลูมิเนียมรีไซเคิลได้ไม่รู้จบ พร้อมการจัดส่งที่ใส่ใจมหาสมุทรในทุกออเดอร์" data-lang-en="Infinitely recyclable aluminum and ocean-positive shipping on every order.">อะลูมิเนียมรีไซเคิลได้ไม่รู้จบ พร้อมการจัดส่งที่ใส่ใจมหาสมุทรในทุกออเดอร์</p>
       </div>
       <div class="feature">
         <div class="ic"><i data-lucide="sparkles"></i></div>
-        <h3>Real, loud fizz</h3>
-        <p>Pressurized for a genuine wave of bubbles — the kind you can hear crack open.</p>
+        <h3 data-lang-th="ความซ่าแท้ที่ได้ยินชัด" data-lang-en="Real, loud fizz">ความซ่าแท้ที่ได้ยินชัด</h3>
+        <p data-lang-th="อัดแรงดันเพื่อคลื่นฟองอากาศที่แท้จริง แบบที่ได้ยินเสียงตอนเปิดกระป๋อง" data-lang-en="Pressurized for a genuine wave of bubbles — the kind you can hear crack open.">อัดแรงดันเพื่อคลื่นฟองอากาศที่แท้จริง แบบที่ได้ยินเสียงตอนเปิดกระป๋อง</p>
       </div>
     </div>
   </div>
@@ -470,15 +499,15 @@
   <div class="story-inner">
     <div class="story-img">
       <img src="https://images.unsplash.com/photo-1616141893496-fbc65370493e?w=720&h=900&fit=crop" alt="Ocean waves">
-      <div class="badge">Founded<br>on the<br>coast</div>
+      <div class="badge"><span data-lang-th="ก่อตั้ง" data-lang-en="Founded">ก่อตั้ง</span><br><span data-lang-th="ริม" data-lang-en="on the">ริม</span><br><span data-lang-th="ชายฝั่ง" data-lang-en="coast">ชายฝั่ง</span></div>
     </div>
     <div class="story-text">
-      <span class="tag" style="font-size:.74rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--aqua);display:block;margin-bottom:14px">Our story</span>
-      <h2>A soda the size of the ocean</h2>
-      <p>Han grew up where the surf met the sand, where every morning began with the crash and pull of the tide. The drinks on the shelf felt flat by comparison — too sweet, too still, too quiet.</p>
-      <div class="quote">"I wanted a soda that felt like diving into a wave — cold, electric, and impossible to sit still through."</div>
-      <p>So Han's Splash was born: a business soda for people in motion, charged with sea minerals and built on the simple idea that refreshment should feel alive.</p>
-      <a href="#join" class="btn btn-primary" style="align-self:flex-start;margin-top:8px">Join the wave <i data-lucide="arrow-right"></i></a>
+      <span class="tag" style="font-size:.74rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--aqua);display:block;margin-bottom:14px" data-lang-th="เรื่องราวของเรา" data-lang-en="Our story">เรื่องราวของเรา</span>
+      <h2 data-lang-th="โซดาที่ยิ่งใหญ่ดั่งมหาสมุทร" data-lang-en="A soda the size of the ocean">โซดาที่ยิ่งใหญ่ดั่งมหาสมุทร</h2>
+      <p data-lang-th="ฮานเติบโตในที่ที่คลื่นซัดเข้าหาหาดทราย ที่ซึ่งทุกเช้าเริ่มต้นด้วยเสียงคลื่นกระทบและแรงดึงของกระแสน้ำ เครื่องดื่มบนชั้นวางกลับดูจืดชืดเมื่อเทียบกัน — หวานเกินไป นิ่งเกินไป และเงียบเกินไป" data-lang-en="Han grew up where the surf met the sand, where every morning began with the crash and pull of the tide. The drinks on the shelf felt flat by comparison — too sweet, too still, too quiet.">ฮานเติบโตในที่ที่คลื่นซัดเข้าหาหาดทราย ที่ซึ่งทุกเช้าเริ่มต้นด้วยเสียงคลื่นกระทบและแรงดึงของกระแสน้ำ เครื่องดื่มบนชั้นวางกลับดูจืดชืดเมื่อเทียบกัน — หวานเกินไป นิ่งเกินไป และเงียบเกินไป</p>
+      <div class="quote" data-lang-th="&ldquo;ผมอยากได้โซดาที่ให้ความรู้สึกเหมือนกระโดดลงไปในคลื่น — เย็น ซ่า และนั่งเฉย ๆ ไม่ได้เลย&rdquo;" data-lang-en="&quot;I wanted a soda that felt like diving into a wave — cold, electric, and impossible to sit still through.&quot;">&ldquo;ผมอยากได้โซดาที่ให้ความรู้สึกเหมือนกระโดดลงไปในคลื่น — เย็น ซ่า และนั่งเฉย ๆ ไม่ได้เลย&rdquo;</div>
+      <p data-lang-th="Han's Splash จึงถือกำเนิดขึ้น โซดาสำหรับคนที่ไม่เคยหยุดนิ่ง อัดแน่นด้วยแร่ธาตุจากทะเล บนแนวคิดง่าย ๆ ว่าความสดชื่นควรมีชีวิตชีวา" data-lang-en="So Han's Splash was born: a business soda for people in motion, charged with sea minerals and built on the simple idea that refreshment should feel alive.">Han's Splash จึงถือกำเนิดขึ้น โซดาสำหรับคนที่ไม่เคยหยุดนิ่ง อัดแน่นด้วยแร่ธาตุจากทะเล บนแนวคิดง่าย ๆ ว่าความสดชื่นควรมีชีวิตชีวา</p>
+      <a href="#join" class="btn btn-primary" style="align-self:flex-start;margin-top:8px"><span data-lang-th="ร่วมเป็นส่วนหนึ่งของคลื่น" data-lang-en="Join the wave">ร่วมเป็นส่วนหนึ่งของคลื่น</span> <i data-lucide="arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -487,24 +516,24 @@
 <section class="voices" id="voices">
   <div class="wrap">
     <div class="section-head">
-      <span class="tag" style="color:var(--coral)">In their words</span>
-      <h2>People can't stop splashing</h2>
+      <span class="tag" style="color:var(--coral)" data-lang-th="ในคำพูดของพวกเขา" data-lang-en="In their words">ในคำพูดของพวกเขา</span>
+      <h2 data-lang-th="ผู้คนหยุดความซ่าไม่ได้" data-lang-en="People can't stop splashing">ผู้คนหยุดความซ่าไม่ได้</h2>
     </div>
     <div class="voice-grid">
       <div class="voice">
         <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
-        <p>"Citrus Surge is the only thing on my desk now. It's like the whole sea fits in one can — bright and totally addictive."</p>
-        <div class="who"><div class="av">MJ</div><div><b>Mara Jensen</b><span>Studio founder</span></div></div>
+        <p data-lang-th="&ldquo;ตอนนี้บนโต๊ะผมมีแต่ Citrus Surge เท่านั้น มันเหมือนทั้งทะเลถูกบรรจุในกระป๋องเดียว — สดใสและติดใจสุด ๆ&rdquo;" data-lang-en="&quot;Citrus Surge is the only thing on my desk now. It's like the whole sea fits in one can — bright and totally addictive.&quot;">&ldquo;ตอนนี้บนโต๊ะผมมีแต่ Citrus Surge เท่านั้น มันเหมือนทั้งทะเลถูกบรรจุในกระป๋องเดียว — สดใสและติดใจสุด ๆ&rdquo;</p>
+        <div class="who"><div class="av">MJ</div><div><b>Mara Jensen</b><span data-lang-th="ผู้ก่อตั้งสตูดิโอ" data-lang-en="Studio founder">ผู้ก่อตั้งสตูดิโอ</span></div></div>
       </div>
       <div class="voice">
         <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
-        <p>"Swapped my afternoon coffee for Reef Mint and never looked back. Crisp, clean, and the fizz actually means it."</p>
-        <div class="who"><div class="av">DO</div><div><b>Diego Ortega</b><span>Product designer</span></div></div>
+        <p data-lang-th="&ldquo;เปลี่ยนจากกาแฟยามบ่ายมาเป็น Reef Mint แล้วไม่เคยหันกลับไปอีกเลย สดชื่น สะอาด และความซ่าก็จริงจังสมคำ&rdquo;" data-lang-en="&quot;Swapped my afternoon coffee for Reef Mint and never looked back. Crisp, clean, and the fizz actually means it.&quot;">&ldquo;เปลี่ยนจากกาแฟยามบ่ายมาเป็น Reef Mint แล้วไม่เคยหันกลับไปอีกเลย สดชื่น สะอาด และความซ่าก็จริงจังสมคำ&rdquo;</p>
+        <div class="who"><div class="av">DO</div><div><b>Diego Ortega</b><span data-lang-th="นักออกแบบผลิตภัณฑ์" data-lang-en="Product designer">นักออกแบบผลิตภัณฑ์</span></div></div>
       </div>
       <div class="voice">
         <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
-        <p>"We stock Han's Splash in the whole office. Tide Berry disappears by noon. It just feels different — energetic."</p>
-        <div class="who"><div class="av">SL</div><div><b>Sana Lee</b><span>Ops lead</span></div></div>
+        <p data-lang-th="&ldquo;เราสต็อก Han's Splash ไว้ทั้งออฟฟิศ Tide Berry หมดตั้งแต่เที่ยง มันให้ความรู้สึกที่ต่างออกไป — เต็มไปด้วยพลัง&rdquo;" data-lang-en="&quot;We stock Han's Splash in the whole office. Tide Berry disappears by noon. It just feels different — energetic.&quot;">&ldquo;เราสต็อก Han's Splash ไว้ทั้งออฟฟิศ Tide Berry หมดตั้งแต่เที่ยง มันให้ความรู้สึกที่ต่างออกไป — เต็มไปด้วยพลัง&rdquo;</p>
+        <div class="who"><div class="av">SL</div><div><b>Sana Lee</b><span data-lang-th="หัวหน้าฝ่ายปฏิบัติการ" data-lang-en="Ops lead">หัวหน้าฝ่ายปฏิบัติการ</span></div></div>
       </div>
     </div>
   </div>
@@ -514,11 +543,11 @@
 <section class="cta" id="join">
   <div class="wrap">
     <div class="cta-card">
-      <h2>Ride your first wave</h2>
-      <p>Join the splash list for early flavor drops, founder stories, and a code for your first variety pack.</p>
+      <h2 data-lang-th="โต้คลื่นลูกแรกของคุณ" data-lang-en="Ride your first wave">โต้คลื่นลูกแรกของคุณ</h2>
+      <p data-lang-th="สมัครรับข่าวสารจาก Han's Splash เพื่อรับรสชาติใหม่ก่อนใคร เรื่องราวจากผู้ก่อตั้ง และโค้ดส่วนลดสำหรับแพ็กรวมรสชาติแรกของคุณ" data-lang-en="Join the splash list for early flavor drops, founder stories, and a code for your first variety pack.">สมัครรับข่าวสารจาก Han's Splash เพื่อรับรสชาติใหม่ก่อนใคร เรื่องราวจากผู้ก่อตั้ง และโค้ดส่วนลดสำหรับแพ็กรวมรสชาติแรกของคุณ</p>
       <form class="cta-form" onsubmit="return false">
-        <input type="email" placeholder="you@email.com" aria-label="Email address" required>
-        <button class="btn btn-primary" type="submit" style="background:var(--coral)">Get splashed <i data-lucide="send"></i></button>
+        <input type="email" placeholder="อีเมลของคุณ" data-ph-th="อีเมลของคุณ" data-ph-en="you@email.com" aria-label="Email address" required>
+        <button class="btn btn-primary" type="submit" style="background:var(--coral)"><span data-lang-th="เริ่มความซ่า" data-lang-en="Get splashed">เริ่มความซ่า</span> <i data-lucide="send"></i></button>
       </form>
     </div>
   </div>
@@ -530,7 +559,7 @@
     <div class="foot-grid">
       <div>
         <a href="#" class="logo">HAN'S<span class="splash">Splash</span></a>
-        <p class="blurb">A business soda born from the sea. Crisp, bold, and built to keep you in motion.</p>
+        <p class="blurb" data-lang-th="โซดาสำหรับคนทำงานที่ถือกำเนิดจากท้องทะเล สดชื่น จัดจ้าน และสร้างมาเพื่อให้คุณเคลื่อนไหวอยู่เสมอ" data-lang-en="A business soda born from the sea. Crisp, bold, and built to keep you in motion.">โซดาสำหรับคนทำงานที่ถือกำเนิดจากท้องทะเล สดชื่น จัดจ้าน และสร้างมาเพื่อให้คุณเคลื่อนไหวอยู่เสมอ</p>
         <div class="socials">
           <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
           <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
@@ -538,39 +567,80 @@
         </div>
       </div>
       <div class="foot-col">
-        <h4>Soda</h4>
-        <a href="#flavors">All flavors</a>
-        <a href="#flavors">Variety packs</a>
-        <a href="#join">Subscribe</a>
-        <a href="#">Store finder</a>
+        <h4 data-lang-th="โซดา" data-lang-en="Soda">โซดา</h4>
+        <a href="#flavors" data-lang-th="รสชาติทั้งหมด" data-lang-en="All flavors">รสชาติทั้งหมด</a>
+        <a href="#flavors" data-lang-th="แพ็กรวมรสชาติ" data-lang-en="Variety packs">แพ็กรวมรสชาติ</a>
+        <a href="#join" data-lang-th="สมัครสมาชิก" data-lang-en="Subscribe">สมัครสมาชิก</a>
+        <a href="#" data-lang-th="ค้นหาร้านค้า" data-lang-en="Store finder">ค้นหาร้านค้า</a>
       </div>
       <div class="foot-col">
-        <h4>Brand</h4>
-        <a href="#story">Our story</a>
-        <a href="#why">Why Han's</a>
-        <a href="#">Sustainability</a>
-        <a href="#">Careers</a>
+        <h4 data-lang-th="แบรนด์" data-lang-en="Brand">แบรนด์</h4>
+        <a href="#story" data-lang-th="เรื่องราวของเรา" data-lang-en="Our story">เรื่องราวของเรา</a>
+        <a href="#why" data-lang-th="ทำไมต้อง Han's" data-lang-en="Why Han's">ทำไมต้อง Han's</a>
+        <a href="#" data-lang-th="ความยั่งยืน" data-lang-en="Sustainability">ความยั่งยืน</a>
+        <a href="#" data-lang-th="ร่วมงานกับเรา" data-lang-en="Careers">ร่วมงานกับเรา</a>
       </div>
       <div class="foot-col">
-        <h4>Support</h4>
-        <a href="#">Contact</a>
-        <a href="#">Wholesale</a>
-        <a href="#">FAQ</a>
-        <a href="#">Shipping</a>
+        <h4 data-lang-th="ฝ่ายช่วยเหลือ" data-lang-en="Support">ฝ่ายช่วยเหลือ</h4>
+        <a href="#" data-lang-th="ติดต่อเรา" data-lang-en="Contact">ติดต่อเรา</a>
+        <a href="#" data-lang-th="ขายส่ง" data-lang-en="Wholesale">ขายส่ง</a>
+        <a href="#" data-lang-th="คำถามที่พบบ่อย" data-lang-en="FAQ">คำถามที่พบบ่อย</a>
+        <a href="#" data-lang-th="การจัดส่ง" data-lang-en="Shipping">การจัดส่ง</a>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 Han's Splash Business Soda. All waves reserved.</span>
-      <span>Privacy · Terms · Made by the coast</span>
+      <span data-lang-th="© 2026 Han's Splash Business Soda สงวนลิขสิทธิ์ทุกคลื่น" data-lang-en="© 2026 Han's Splash Business Soda. All waves reserved.">© 2026 Han's Splash Business Soda สงวนลิขสิทธิ์ทุกคลื่น</span>
+      <span data-lang-th="ความเป็นส่วนตัว · ข้อกำหนด · สร้างสรรค์ริมชายฝั่ง" data-lang-en="Privacy · Terms · Made by the coast">ความเป็นส่วนตัว · ข้อกำหนด · สร้างสรรค์ริมชายฝั่ง</span>
     </div>
   </div>
 </footer>
 
 <script>
+  /* ---------- LANGUAGE SWITCHER ---------- */
+  const META = {
+    th:{
+      title:"Han's Splash — โซดาซ่าสำหรับคนทำงาน",
+      desc:"Han's Splash โซดาซ่าจัดจ้านที่เกิดจากท้องทะเล ไม่เติมน้ำตาล 6 รสชาติจัดเต็ม พร้อมความซ่าแท้ ๆ สำหรับคนที่ไม่เคยหยุดนิ่ง"
+    },
+    en:{
+      title:"Han's Splash — Business Soda",
+      desc:"Han's Splash — a bold, crisp business soda born from the sea. Zero added sugar, six wild flavors, and real, loud fizz."
+    }
+  };
+
+  function applyLang(lang){
+    if(lang !== 'en') lang = 'th';
+    document.documentElement.lang = lang;
+    const attr = lang === 'th' ? 'data-lang-th' : 'data-lang-en';
+    document.querySelectorAll('[data-lang-th]').forEach(el => {
+      el.textContent = el.getAttribute(attr);
+    });
+    document.querySelectorAll('[data-ph-th]').forEach(el => {
+      el.setAttribute('placeholder', el.getAttribute(lang === 'th' ? 'data-ph-th' : 'data-ph-en'));
+    });
+    document.title = META[lang].title;
+    const md = document.querySelector('meta[name="description"]');
+    if(md) md.setAttribute('content', META[lang].desc);
+    document.querySelectorAll('#langSwitch button').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-set-lang') === lang);
+    });
+    try{ localStorage.setItem('lang', lang); }catch(e){}
+  }
+
+  let saved = 'th';
+  try{ saved = localStorage.getItem('lang') || 'th'; }catch(e){}
+  applyLang(saved);
+
+  document.querySelectorAll('#langSwitch button').forEach(b => {
+    b.addEventListener('click', () => applyLang(b.getAttribute('data-set-lang')));
+  });
+
+  /* ---------- MOBILE NAV ---------- */
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
   toggle.addEventListener('click', () => links.classList.toggle('open'));
   links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
   lucide.createIcons();
 </script>
 </body>
