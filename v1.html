@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Han's Splash — Business Soda</title>
+<script src="https://unpkg.com/lucide@0.460.0"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --aqua:#00d4d4;
+    --deep:#0b4f63;
+    --teal:#0e8aa3;
+    --coral:#ff5d73;
+    --sun:#ffd23f;
+    --foam:#eafcff;
+    --ink:#06343f;
+    --white:#ffffff;
+    --grad:linear-gradient(135deg,#00e0c6 0%,#0db8e8 45%,#5a6bff 100%);
+    --grad-warm:linear-gradient(120deg,#ff5d73 0%,#ffa45b 60%,#ffd23f 100%);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Outfit',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+  h1,h2,h3,.logo{font-family:'Baloo 2',cursive,sans-serif;line-height:1.05;}
+  img{display:block;max-width:100%}
+  a{text-decoration:none;color:inherit}
+  .wrap{width:min(1180px,92vw);margin-inline:auto}
+  section{position:relative}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(12px);
+    background:rgba(234,252,255,.72);
+    border-bottom:1px solid rgba(14,138,163,.12);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .logo{
+    font-weight:800;font-size:1.6rem;letter-spacing:-.5px;
+    display:flex;align-items:center;gap:.45rem;color:var(--deep);
+  }
+  .logo .dot{
+    width:.7em;height:.7em;border-radius:50% 50% 50% 0;
+    background:var(--grad);transform:rotate(45deg);
+    box-shadow:0 4px 14px rgba(13,184,232,.5);
+  }
+  .logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .navlinks{display:flex;gap:2rem;align-items:center;font-weight:500}
+  .navlinks a{position:relative;font-size:.98rem;opacity:.85;transition:.2s}
+  .navlinks a:hover{opacity:1;color:var(--teal)}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--aqua);transition:.25s}
+  .navlinks a:hover::after{width:100%}
+  .btn{
+    font-family:'Baloo 2',sans-serif;font-weight:700;
+    display:inline-flex;align-items:center;gap:.5rem;
+    padding:.7rem 1.4rem;border-radius:999px;cursor:pointer;border:none;
+    background:var(--grad);color:#fff;font-size:1rem;
+    box-shadow:0 8px 22px rgba(13,184,232,.4);transition:.25s;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(13,184,232,.55)}
+  .btn.ghost{background:transparent;color:var(--deep);box-shadow:none;border:2px solid rgba(14,138,163,.3)}
+  .btn.ghost:hover{border-color:var(--teal);background:rgba(14,138,163,.06)}
+  .btn.warm{background:var(--grad-warm);box-shadow:0 8px 22px rgba(255,93,115,.4)}
+  .navtoggle{display:none;background:none;border:none;color:var(--deep);cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(900px 500px at 85% -10%,rgba(90,107,255,.18),transparent 60%),
+      radial-gradient(700px 500px at -5% 10%,rgba(0,212,212,.22),transparent 55%),
+      var(--foam);
+    padding:clamp(3rem,7vw,6rem) 0 0;
+    overflow:hidden;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center}
+  .tag{
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:#fff;border:1px solid rgba(14,138,163,.18);
+    padding:.45rem 1rem;border-radius:999px;font-weight:600;font-size:.85rem;
+    color:var(--teal);box-shadow:0 6px 18px rgba(11,79,99,.07);
+  }
+  .tag i{width:16px;height:16px}
+  .hero h1{
+    font-size:clamp(2.7rem,6vw,4.6rem);font-weight:800;margin:1.3rem 0 1.1rem;
+    color:var(--deep);letter-spacing:-1px;
+  }
+  .hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lede{font-size:1.18rem;max-width:30rem;color:#2a5763;font-weight:300}
+  .hero-cta{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+  .hero-meta{display:flex;gap:2rem;margin-top:2.6rem}
+  .hero-meta div span{display:block;font-family:'Baloo 2';font-weight:800;font-size:1.7rem;color:var(--teal)}
+  .hero-meta div small{font-size:.82rem;color:#4a737f;letter-spacing:.3px}
+
+  .hero-visual{position:relative}
+  .hero-visual .photo{
+    border-radius:32px;overflow:hidden;
+    box-shadow:0 30px 70px rgba(11,79,99,.28);
+    aspect-ratio:4/5;
+    border:6px solid #fff;
+    transform:rotate(2deg);
+  }
+  .hero-visual .photo img{width:100%;height:100%;object-fit:cover}
+  .float-card{
+    position:absolute;background:#fff;border-radius:18px;padding:.9rem 1.1rem;
+    box-shadow:0 16px 40px rgba(11,79,99,.2);display:flex;align-items:center;gap:.7rem;
+    font-weight:600;font-size:.92rem;
+  }
+  .float-card i{color:var(--coral)}
+  .fc1{top:8%;left:-6%;animation:bob 4s ease-in-out infinite}
+  .fc2{bottom:9%;right:-7%;animation:bob 4s ease-in-out infinite .8s}
+  .fc2 i{color:var(--teal)}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  /* bubbles */
+  .bubbles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .bubbles span{
+    position:absolute;bottom:-40px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(0,212,212,.25));
+    animation:rise linear infinite;opacity:.6;
+  }
+  @keyframes rise{to{transform:translateY(-110vh) translateX(40px);opacity:0}}
+
+  /* wave divider */
+  .wave{display:block;width:100%;height:auto;margin-top:3rem}
+
+  /* ---------- MARQUEE ---------- */
+  .strip{background:var(--deep);color:var(--foam);padding:1.1rem 0;overflow:hidden}
+  .marquee{display:flex;gap:3rem;white-space:nowrap;animation:scroll 22s linear infinite;font-family:'Baloo 2';font-weight:600;font-size:1.1rem}
+  .marquee span{display:inline-flex;align-items:center;gap:.7rem;opacity:.92}
+  .marquee i{color:var(--aqua);width:18px;height:18px}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* ---------- FLAVORS ---------- */
+  .section-pad{padding:clamp(4rem,8vw,7rem) 0}
+  .eyebrow{font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem;color:var(--coral)}
+  .h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;color:var(--deep);margin:.6rem 0 1rem;letter-spacing:-.5px}
+  .center{text-align:center}
+  .center p.sub{max-width:38rem;margin:0 auto;color:#4a737f;font-weight:300;font-size:1.1rem}
+  .flavors{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem}
+  .flavor{
+    border-radius:26px;padding:2rem 1.6rem;color:#fff;position:relative;overflow:hidden;
+    min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;
+    transition:.3s;cursor:pointer;
+  }
+  .flavor:hover{transform:translateY(-8px)}
+  .flavor::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 60%);z-index:1}
+  .flavor img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:.5s}
+  .flavor:hover img{transform:scale(1.08)}
+  .flavor .body{position:relative;z-index:2}
+  .flavor h3{font-size:1.5rem;font-weight:700}
+  .flavor p{font-size:.92rem;opacity:.92;font-weight:300}
+  .flavor .pill{
+    position:relative;z-index:2;align-self:flex-start;margin-bottom:.8rem;
+    background:rgba(255,255,255,.22);backdrop-filter:blur(6px);
+    padding:.3rem .8rem;border-radius:999px;font-size:.78rem;font-weight:600;
+  }
+
+  /* ---------- FEATURES ---------- */
+  .features{background:linear-gradient(180deg,#fff,var(--foam))}
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:3rem}
+  .feat{
+    background:#fff;border-radius:22px;padding:2rem 1.5rem;
+    border:1px solid rgba(14,138,163,.1);transition:.3s;
+    box-shadow:0 10px 30px rgba(11,79,99,.05);
+  }
+  .feat:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(11,79,99,.13)}
+  .feat .ic{
+    width:54px;height:54px;border-radius:16px;display:grid;place-items:center;
+    background:var(--grad);color:#fff;margin-bottom:1.2rem;
+  }
+  .feat:nth-child(even) .ic{background:var(--grad-warm)}
+  .feat .ic i{width:26px;height:26px}
+  .feat h3{font-size:1.2rem;font-weight:700;color:var(--deep);margin-bottom:.4rem}
+  .feat p{font-size:.94rem;color:#4a737f;font-weight:300}
+
+  /* ---------- SPLIT / LIFESTYLE ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+  .split .imgwrap{position:relative;border-radius:30px;overflow:hidden;aspect-ratio:1/1;box-shadow:0 26px 60px rgba(11,79,99,.22)}
+  .split .imgwrap img{width:100%;height:100%;object-fit:cover}
+  .split h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:800;color:var(--deep);letter-spacing:-.5px;margin:.6rem 0 1.1rem}
+  .checklist{list-style:none;margin-top:1.6rem;display:grid;gap:1rem}
+  .checklist li{display:flex;gap:.9rem;align-items:flex-start;font-weight:400;color:#2a5763}
+  .checklist .ck{flex:none;width:30px;height:30px;border-radius:50%;background:rgba(0,212,212,.16);display:grid;place-items:center;color:var(--teal)}
+  .checklist .ck i{width:17px;height:17px}
+  .checklist b{font-weight:700;color:var(--deep)}
+
+  /* ---------- STATS BANNER ---------- */
+  .banner{background:var(--grad);color:#fff;border-radius:34px;padding:clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+  .banner::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,.12);top:-120px;right:-80px}
+  .banner::after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.1);bottom:-110px;left:10%}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;position:relative;z-index:2;text-align:center}
+  .stats .num{font-family:'Baloo 2';font-weight:800;font-size:clamp(2.2rem,5vw,3.4rem)}
+  .stats small{display:block;opacity:.9;font-size:.95rem;margin-top:.2rem}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem}
+  .quote{background:#fff;border-radius:24px;padding:2rem;border:1px solid rgba(14,138,163,.1);box-shadow:0 10px 30px rgba(11,79,99,.06)}
+  .stars{display:flex;gap:.2rem;color:var(--sun);margin-bottom:1rem}
+  .stars i{width:18px;height:18px;fill:var(--sun)}
+  .quote p{font-size:1rem;color:#2a5763;margin-bottom:1.4rem}
+  .who{display:flex;align-items:center;gap:.8rem}
+  .who .av{width:44px;height:44px;border-radius:50%;background:var(--grad);display:grid;place-items:center;color:#fff;font-family:'Baloo 2';font-weight:700}
+  .who b{display:block;color:var(--deep)}
+  .who small{color:#4a737f}
+
+  /* ---------- CTA ---------- */
+  .cta{text-align:center;background:var(--foam);overflow:hidden}
+  .cta h2{font-size:clamp(2.2rem,5.5vw,4rem);font-weight:800;color:var(--deep);letter-spacing:-1px}
+  .cta h2 em{font-style:normal;background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cta p{max-width:32rem;margin:1rem auto 2rem;color:#4a737f;font-size:1.1rem;font-weight:300}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#bfe9f0;padding:4rem 0 2rem}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2.5rem}
+  footer .logo{color:#fff;margin-bottom:1rem}
+  footer .logo b{color:#fff;background:none;-webkit-background-clip:initial}
+  footer p.about{font-weight:300;opacity:.8;max-width:22rem;font-size:.95rem}
+  .fcol h4{font-family:'Baloo 2';font-size:1rem;color:#fff;margin-bottom:1rem}
+  .fcol a{display:block;opacity:.78;font-weight:300;margin-bottom:.6rem;font-size:.93rem;transition:.2s}
+  .fcol a:hover{opacity:1;color:var(--aqua)}
+  .social{display:flex;gap:.7rem;margin-top:1.4rem}
+  .social a{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.08);display:grid;place-items:center;transition:.25s}
+  .social a:hover{background:var(--aqua);color:var(--ink)}
+  .social i{width:18px;height:18px}
+  .copy{border-top:1px solid rgba(255,255,255,.1);margin-top:3rem;padding-top:1.6rem;text-align:center;opacity:.6;font-size:.86rem;font-weight:300}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    .navlinks{display:none}
+    .navtoggle{display:block}
+    .hero-grid{grid-template-columns:1fr;gap:2.5rem}
+    .hero-visual{max-width:420px;margin-inline:auto}
+    .float-card{font-size:.82rem;padding:.7rem .9rem}
+    .fc1{left:-2%}.fc2{right:-2%}
+    .flavors{grid-template-columns:1fr 1fr}
+    .feat-grid{grid-template-columns:1fr 1fr}
+    .split{grid-template-columns:1fr;gap:2.2rem}
+    .stats{grid-template-columns:1fr 1fr;gap:1.6rem}
+    .quotes{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:2rem}
+  }
+  @media(max-width:520px){
+    .flavors{grid-template-columns:1fr}
+    .feat-grid{grid-template-columns:1fr}
+    .hero-meta{gap:1.3rem}
+    .foot-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo"><span class="dot"></span>Han's<b>Splash</b></a>
+    <nav class="navlinks">
+      <a href="#flavors">Flavors</a>
+      <a href="#why">Why Splash</a>
+      <a href="#lifestyle">Lifestyle</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#order" class="btn">Order Now <i data-lucide="arrow-right"></i></a>
+    </nav>
+    <button class="navtoggle" aria-label="Menu"><i data-lucide="menu"></i></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="bubbles" id="bubbles"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag"><i data-lucide="waves"></i> Born from the sea breeze</span>
+      <h1>Soda that hits like a <em>wave</em>.</h1>
+      <p class="lede">Crisp, kinetic, and impossibly refreshing. Han's Splash Business Soda bottles the energy of the open water — one fizzing sip at a time.</p>
+      <div class="hero-cta">
+        <a href="#order" class="btn warm">Taste the Splash <i data-lucide="cup-soda"></i></a>
+        <a href="#flavors" class="btn ghost">See Flavors</a>
+      </div>
+      <div class="hero-meta">
+        <div><span>7</span><small>Wave-fresh flavors</small></div>
+        <div><span>0g</span><small>Artificial fizz</small></div>
+        <div><span>4.9</span><small>Splash rating</small></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="photo">
+        <img src="https://images.unsplash.com/flagged/photo-1553353799-a992825b0d07?w=720&h=900&fit=crop" alt="Ice splashing into a clear glass of soda" />
+      </div>
+      <div class="float-card fc1"><i data-lucide="snowflake"></i> Ice-cold crisp</div>
+      <div class="float-card fc2"><i data-lucide="droplets"></i> Real wave minerals</div>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none"><path fill="#0b4f63" d="M0,64L60,58.7C120,53,240,43,360,48C480,53,600,75,720,80C840,85,960,75,1080,64C1200,53,1320,43,1380,37.3L1440,32L1440,120L0,120Z"></path></svg>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="marquee" id="marquee">
+    <span><i data-lucide="waves"></i> Made with sea-breeze freshness</span>
+    <span><i data-lucide="leaf"></i> Naturally flavored</span>
+    <span><i data-lucide="zap"></i> Kinetic carbonation</span>
+    <span><i data-lucide="recycle"></i> 100% recyclable cans</span>
+    <span><i data-lucide="sun"></i> Built for sunny days</span>
+  </div>
+</div>
+
+<!-- FLAVORS -->
+<section class="section-pad" id="flavors">
+  <div class="wrap center">
+    <span class="eyebrow">The Flavor Reef</span>
+    <h2 class="h2">Seven splashes of pure refreshment</h2>
+    <p class="sub">Each can is tuned to a different mood of the sea — from a calm citrus tide to a roaring berry surge.</p>
+    <div class="flavors">
+      <article class="flavor">
+        <img src="https://images.unsplash.com/photo-1625813506062-ccb45305a4cc?w=520&h=680&fit=crop" alt="Citrus splash flavor" />
+        <span class="pill">Calm Tide</span>
+        <div class="body"><h3>Citrus Crush</h3><p>Bright lemon &amp; yuzu with a salt-air finish.</p></div>
+      </article>
+      <article class="flavor">
+        <img src="https://images.unsplash.com/photo-1580691155297-c6dfa3ca61c4?w=520&h=680&fit=crop" alt="Berry splash flavor" />
+        <span class="pill">High Surge</span>
+        <div class="body"><h3>Berry Break</h3><p>Wild blueberry &amp; raspberry, electric and cool.</p></div>
+      </article>
+      <article class="flavor">
+        <img src="https://images.unsplash.com/photo-1533167649158-6d508895b680?w=520&h=680&fit=crop" alt="Pure water splash flavor" />
+        <span class="pill">Open Water</span>
+        <div class="body"><h3>Clear Current</h3><p>Pure sparkling mineral splash, zero sweetness.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features section-pad" id="why">
+  <div class="wrap center">
+    <span class="eyebrow">Why Splash</span>
+    <h2 class="h2">Refreshment with real momentum</h2>
+    <p class="sub">We engineered every bubble to move the way water does — alive, energetic, and never flat.</p>
+  </div>
+  <div class="wrap feat-grid">
+    <div class="feat">
+      <div class="ic"><i data-lucide="wind"></i></div>
+      <h3>Kinetic Fizz</h3>
+      <p>A tighter bubble structure that keeps its crackle from first pour to last drop.</p>
+    </div>
+    <div class="feat">
+      <div class="ic"><i data-lucide="sparkles"></i></div>
+      <h3>Clean Ingredients</h3>
+      <p>Naturally sourced flavors, no artificial colors, and a featherweight sugar touch.</p>
+    </div>
+    <div class="feat">
+      <div class="ic"><i data-lucide="thermometer-snowflake"></i></div>
+      <h3>Crisp at Any Temp</h3>
+      <p>Tuned to taste sharp ice-cold or breezy at room temperature — your call.</p>
+    </div>
+    <div class="feat">
+      <div class="ic"><i data-lucide="globe"></i></div>
+      <h3>Tidewise &amp; Green</h3>
+      <p>Fully recyclable cans and ocean-friendly sourcing in every single batch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE SPLIT -->
+<section class="section-pad" id="lifestyle">
+  <div class="wrap split">
+    <div class="imgwrap">
+      <img src="https://images.unsplash.com/photo-1769134277079-793a2d1df196?w=760&h=760&fit=crop" alt="People gathering at a sunny beachside soda cart" />
+    </div>
+    <div>
+      <span class="eyebrow">Made for movement</span>
+      <h2>Wherever the day takes you, the splash follows.</h2>
+      <p style="color:#4a737f;font-weight:300;font-size:1.08rem">Boardroom or boardwalk — Han's Splash keeps pace. It's the business soda that refuses to sit still, built for people who like their refreshment in motion.</p>
+      <ul class="checklist">
+        <li><span class="ck"><i data-lucide="check"></i></span><div><b>Pocket-ready cans</b> that chill fast and travel light.</div></li>
+        <li><span class="ck"><i data-lucide="check"></i></span><div><b>Balanced energy</b> — a clean lift without the crash.</div></li>
+        <li><span class="ck"><i data-lucide="check"></i></span><div><b>Pairs with everything</b> from desk lunches to sunset surf.</div></li>
+      </ul>
+      <a href="#order" class="btn" style="margin-top:2rem">Stock your fridge <i data-lucide="arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BANNER -->
+<section class="section-pad" style="padding-top:0">
+  <div class="wrap">
+    <div class="banner">
+      <div class="stats">
+        <div><div class="num">2.4M</div><small>Cans splashed</small></div>
+        <div><div class="num">38</div><small>Cities surfing in</small></div>
+        <div><div class="num">7</div><small>Wave-fresh flavors</small></div>
+        <div><div class="num">100%</div><small>Recyclable cans</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-pad" id="reviews" style="padding-top:0">
+  <div class="wrap center">
+    <span class="eyebrow">From the crew</span>
+    <h2 class="h2">People can't stop splashing</h2>
+    <div class="quotes">
+      <div class="quote">
+        <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+        <p>"Tastes like the first jump into the ocean. My whole office switched within a week — the Citrus Crush is dangerous."</p>
+        <div class="who"><div class="av">MR</div><div><b>Mara Reyes</b><small>Studio Lead</small></div></div>
+      </div>
+      <div class="quote">
+        <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+        <p>"Finally a soda with personality. The fizz actually lasts and it doesn't leave that heavy sugar feeling. Berry Break for life."</p>
+        <div class="who"><div class="av">JT</div><div><b>Jordan Tan</b><small>Cafe Owner</small></div></div>
+      </div>
+      <div class="quote">
+        <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+        <p>"Clear Current replaced my afternoon coffee. Crisp, light, and weirdly energizing. The branding alone made me a believer."</p>
+        <div class="who"><div class="av">SK</div><div><b>Sofia Khan</b><small>Product Designer</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta section-pad" id="order">
+  <div class="bubbles" id="bubbles2"></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <span class="eyebrow">Ready to dive in?</span>
+    <h2>Catch your first <em>wave</em> of soda.</h2>
+    <p>Order a starter pack and find out why the whole coast is hooked. Free shipping on your first splash.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="#" class="btn warm">Order a Starter Pack <i data-lucide="shopping-bag"></i></a>
+      <a href="#flavors" class="btn ghost">Browse Flavors</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <a href="#" class="logo"><span class="dot"></span>Han's<b>Splash</b></a>
+      <p class="about">Business soda inspired by the waves of the sea. Crisp, colorful, and made to keep your day in motion.</p>
+      <div class="social">
+        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+        <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+        <a href="#" aria-label="Youtube"><i data-lucide="youtube"></i></a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Drink</h4>
+      <a href="#flavors">All Flavors</a>
+      <a href="#order">Starter Packs</a>
+      <a href="#">Subscriptions</a>
+      <a href="#">Limited Editions</a>
+    </div>
+    <div class="fcol">
+      <h4>Company</h4>
+      <a href="#">Our Story</a>
+      <a href="#">Sustainability</a>
+      <a href="#">Stockists</a>
+      <a href="#">Careers</a>
+    </div>
+    <div class="fcol">
+      <h4>Support</h4>
+      <a href="#">Contact</a>
+      <a href="#">Shipping</a>
+      <a href="#">FAQ</a>
+      <a href="#">Wholesale</a>
+    </div>
+  </div>
+  <div class="wrap copy">© 2026 Han's Splash Business Soda. All waves reserved.</div>
+</footer>
+
+<script>
+  // Floating bubbles generator
+  function spawnBubbles(id,count){
+    const c=document.getElementById(id);
+    if(!c)return;
+    for(let i=0;i<count;i++){
+      const b=document.createElement('span');
+      const size=8+Math.floor(40*((i*37)%100)/100);
+      b.style.width=size+'px';
+      b.style.height=size+'px';
+      b.style.left=((i*53)%100)+'%';
+      b.style.animationDuration=(7+(i%6))+'s';
+      b.style.animationDelay=(-(i%8))+'s';
+      c.appendChild(b);
+    }
+  }
+  spawnBubbles('bubbles',16);
+  spawnBubbles('bubbles2',14);
+
+  // Duplicate marquee for seamless loop
+  const m=document.getElementById('marquee');
+  if(m){m.innerHTML+=m.innerHTML;}
+
+  lucide.createIcons();
+</script>
+</body>
+</html>

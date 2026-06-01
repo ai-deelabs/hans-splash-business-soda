@@ -1,0 +1,30 @@
+{
+  "slug": "hans-splash-business-soda",
+  "brand_dna": "Han's Splash Business Soda is a refreshing soda brand inspired by the waves of the sea. The founder envisions a vibrant, water-like aesthetic that brings to life the essence of hydration and refreshment. The design should evoke feelings of crispness and energy, capturing the dynamic motion of water splashing. It should be colorful, engaging, and visually appealing to attract customers looking for a refreshing beverage experience.",
+  "variant_count": 3,
+  "client_id": null,
+  "tags": [
+    "beverage",
+    "soda",
+    "water"
+  ],
+  "generated_at": "2026-06-01T12:13:44Z",
+  "prompt_template": "variant.md",
+  "actions": [
+    {
+      "type": "generate",
+      "at": "2026-06-01T12:16:18Z",
+      "variants": {
+        "v1": {
+          "size_bytes": 24245
+        },
+        "v2": {
+          "size_bytes": 26514
+        },
+        "v3": {
+          "size_bytes": 25610
+        }
+      }
+    }
+  ]
+}
